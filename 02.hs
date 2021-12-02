@@ -1,7 +1,7 @@
 --part1
 f :: String -> (String, Int)
 f xs = g (words xs) 
-    where g xs =  (head xs, read $ head (reverse xs))
+    where g xs =  (head xs, read $ last xs)
 
 part1 = do 
     file <- readFile "inputs/02.txt"
