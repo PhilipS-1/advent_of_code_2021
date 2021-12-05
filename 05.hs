@@ -28,12 +28,7 @@ onlyHorizontal = filter (\l -> sameX (head l) (last l) || sameY (head l) (last l
     sameY a b = snd a == snd b 
 
 linePoints :: [(Int, Int)] -> [(Int, Int)]
-linePoints l = getPoints x1 x2 y1 y2 where 
-    x1 = fst $ head l 
-    x2 = fst $ last l 
-    y1 = snd $ head l 
-    y2 = snd $ last l 
-    getPoints x1 x2 y1 y2 
+linePoints [(x1, y1),(x2, y2)] 
         | x1 == x2 = [(x1,y) | y <- [(min y1 y2) .. (max y1 y2)]]
         | y1 == y2 = [(x,y1) | x <- [(min x1 x2) .. (max x1 x2)]]
         | otherwise = zip (coords x1 x2) (coords y1 y2) where 
