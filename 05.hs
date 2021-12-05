@@ -2,6 +2,7 @@
 
 import Data.List.Split
 import Data.List
+import Data.Bool 
 
 read' = (read @Int) 
 
@@ -35,7 +36,6 @@ linePoints l = getPoints x1 x2 y1 y2 where
     getPoints x1 x2 y1 y2 
         | x1 == x2 = [(x1,y) | y <- [(min y1 y2) .. (max y1 y2)]]
         | y1 == y2 = [(x,y1) | x <- [(min x1 x2) .. (max x1 x2)]]
-        | x1 < x2 && y1 < y2 = zip [x1..x2] [y1 .. y2]
-        | x1 < x2 && y1 > y2 = zip [x1..x2] [y1, (y1-1) .. y2]
-        | x1 > x2 && y1 < y2 = zip [x1, (x1-1)..x2] [y1 .. y2]
-        | x1 > x2 && y1 > y2 = zip [x1, (x1-1) .. x2] [y1, (y1-1) .. y2]
+        | otherwise = zip (coords x1 x2) (coords y1 y2) where 
+            coords a b = bool [a,a-1 .. b] [a..b]  (a<b)
+        
